@@ -1,0 +1,16 @@
+package UnitsInitializer
+
+import Infernals
+import Sellers
+
+public int SELLER_ID_1 = 0
+
+function doInit(bool compile)
+    initInfernals(compile)
+    initSellers(compile)
+
+init
+    doInit(false)
+
+@compiletime function initialize()
+    doInit(true)    

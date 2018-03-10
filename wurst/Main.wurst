@@ -1,0 +1,25 @@
+package Main
+
+import ClosureTimers
+import Infernals
+import ClosureForGroups
+
+import PlayableRegion
+
+constant NO_TREES_MODE = false
+
+init
+	SetTimeOfDay(0)
+	SuspendTimeOfDay(true)
+	CreateFogModifierRadiusLocBJ(true, Player(0), FOG_OF_WAR_VISIBLE, GetRectCenter(GetPlayableMapRect()), 1024)
+	initializeArea(5)
+	
+	if NO_TREES_MODE
+		doAfter(0.1, () -> begin
+			CreateUnitAtLoc(Player(0), INFERNAL_ID_1, Location(0, 0), 0.0)
+			forDestructablesInRect(GetEntireMapRect(), (destructable d) -> begin
+				if d.getTypeId() == 'ATtr'
+					RemoveDestructable(d)
+			end)
+		end)
+	

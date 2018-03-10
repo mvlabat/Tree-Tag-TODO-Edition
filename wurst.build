@@ -1,0 +1,8 @@
+---
+projectName: "Tree Tag TODO Edition"
+dependencies:
+- "https://github.com/wurstscript/wurstStdlib2"
+buildMapData:
+  name: "DefaultName"
+  fileName: "DefaultFileName"
+  author: "DefaultAuthor"

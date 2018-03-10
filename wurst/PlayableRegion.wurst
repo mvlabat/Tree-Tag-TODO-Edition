@@ -1,0 +1,140 @@
+package PlayableRegion
+
+import ErrorHandling
+
+int infernalsCount
+
+function areaSize(int size) returns real
+    return size.toReal()
+    // return (size div 128) * 128 + 1.0
+
+constant areaSizes = [
+    areaSize(6300),
+    areaSize(6300),
+    areaSize(8200),
+    areaSize(9300),
+    areaSize(10400)
+]
+
+constant pathingOffset = 1280
+constant lineOfSigthOffset = 128
+
+function getPlayableAreaBounds(int infernalsCount) returns rect
+    let halfLength = areaSizes[infernalsCount - 1]
+    return Rect(-halfLength, -halfLength, halfLength, halfLength)
+
+interface RectAction
+    function run(real x, real y)
+
+function doForRect(rect area, int iStep, RectAction func)
+    var x = area.getLeftBot().x
+    var y = area.getLeftBot().y
+    while (y - area.getRightTop().y < 0.01)
+        func.run(x, y)
+        SetTerrainPathable(x, y, PATHING_TYPE_ANY, false)
+        x += iStep
+        if (x > area.getRightTop().x)
+            x = area.getLeftBot().x
+            y += iStep
+
+function blockRectPathing(rect area)
+    doForRect(area, 64, (real x, real y) -> SetTerrainPathable(x, y, PATHING_TYPE_ANY, false))
+
+function blockLineOfSight(rect area)
+    doForRect(area, 128, (real x, real y) -> CreateDestructable('Ytlc', x, y, GetRandomDirectionDeg(), 1, 0))
+
+function blockBottomBorder()
+    if (infernalsCount < 6)
+        let playableArea = getPlayableAreaBounds(infernalsCount)
+        let worldBounds = GetPlayableMapRect()
+        blockLineOfSight(Rect(
+                playableArea.getLeftBot().x - lineOfSigthOffset,
+                playableArea.getLeftBot().y - lineOfSigthOffset,
+                playableArea.getRightBot().x + lineOfSigthOffset,
+                playableArea.getRightBot().y - lineOfSigthOffset))
+        blockRectPathing(Rect(
+            max(worldBounds.getLeftBot().x, playableArea.getLeftBot().x - pathingOffset),
+            max(worldBounds.getLeftBot().y, playableArea.getLeftBot().y - pathingOffset),
+            min(worldBounds.getRightBot().x, playableArea.getRightBot().x + pathingOffset),
+            playableArea.getRightBot().y))
+
+    print("Adapting map size: 25%")
+
+function blockTopBorder()
+    if (infernalsCount < 6)
+        let playableArea = getPlayableAreaBounds(infernalsCount)
+        let worldBounds = GetPlayableMapRect()
+        blockLineOfSight(Rect(
+            playableArea.getLeftTop().x - lineOfSigthOffset,
+            playableArea.getLeftTop().y + lineOfSigthOffset,
+            playableArea.getRightTop().x + lineOfSigthOffset,
+            playableArea.getRightTop().y + lineOfSigthOffset))
+        blockRectPathing(Rect(
+            max(worldBounds.getLeftTop().x, playableArea.getLeftTop().x - pathingOffset),
+            playableArea.getLeftTop().y,
+            min(worldBounds.getRightTop().x, playableArea.getRightTop().x + pathingOffset),
+            min(worldBounds.getRightTop().y, playableArea.getRightTop().y + pathingOffset)))
+
+    print("Adapting map size: 50%")
+
+function blockLeftBorder()
+    if (infernalsCount < 6)
+        let playableArea = getPlayableAreaBounds(infernalsCount)
+        let worldBounds = GetPlayableMapRect()
+        blockLineOfSight(Rect(
+            playableArea.getLeftBot().x - lineOfSigthOffset,
+            playableArea.getLeftBot().y - lineOfSigthOffset,
+            playableArea.getLeftTop().x - lineOfSigthOffset,
+            playableArea.getLeftTop().y + lineOfSigthOffset))
+        blockRectPathing(Rect(
+            max(worldBounds.getLeftBot().x, playableArea.getLeftBot().x - pathingOffset),
+            playableArea.getLeftBot().y,
+            playableArea.getLeftTop().x,
+            playableArea.getLeftTop().y))
+
+    print("Adapting map size: 75%")
+        
+function blockRightBorder()
+    if (infernalsCount < 6)
+        let playableArea = getPlayableAreaBounds(infernalsCount)
+        let worldBounds = GetPlayableMapRect()
+        blockLineOfSight(Rect(
+            playableArea.getRightBot().x + lineOfSigthOffset,
+            playableArea.getRightBot().y - lineOfSigthOffset,
+            playableArea.getRightTop().x + lineOfSigthOffset,
+            playableArea.getRightTop().y + lineOfSigthOffset))
+        blockRectPathing(Rect(
+            playableArea.getRightBot().x,
+            playableArea.getRightBot().y,
+            min(worldBounds.getRightTop().x, playableArea.getRightTop().x + pathingOffset),
+            playableArea.getRightTop().y))
+            
+    print("Adapting map size: 100%")
+
+public function initializeArea(int p_infernalsCount)
+    infernalsCount = p_infernalsCount
+    if (infernalsCount < 1 or infernalsCount > 6)
+        error("Invalid infernals count value")
+
+    if (infernalsCount == 6)
+        return
+        
+    // Bottom border.
+    CreateTrigger()
+        ..registerTimerEvent(0.1, false)
+        ..addAction(function blockBottomBorder)
+    
+    // Top border.
+    CreateTrigger()
+        ..registerTimerEvent(0.2, false)
+        ..addAction(function blockTopBorder)
+
+    // Left border.
+    CreateTrigger()
+        ..registerTimerEvent(0.3, false)
+        ..addAction(function blockLeftBorder)
+
+    // Right border.
+    CreateTrigger()
+        ..registerTimerEvent(0.4, false)
+        ..addAction(function blockRightBorder)

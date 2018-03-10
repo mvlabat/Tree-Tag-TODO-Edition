@@ -1,0 +1,17 @@
+package Infernals
+
+import HeroPreset
+import UnitObjEditing
+import ObjectIdGenerator
+import TimerUtils
+
+public int INFERNAL_ID_1 = 0
+
+public function initInfernals(bool compile)
+    INFERNAL_ID_1 = HERO_ID_GEN.next()
+    if (compile)
+        let infernal = new HeroPreset(INFERNAL_ID_1, 'Udre', "Infernal")
+        infernal.setModelFile("units\\demon\\Infernal\\Infernal.mdl")
+        infernal.setScalingValue(1.2)
+        infernal.setCollisionSize(50)
+        infernal.buildHero()
