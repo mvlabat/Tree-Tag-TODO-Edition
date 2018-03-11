@@ -1,6 +1,6 @@
+/.vscode
 /_build
 /wurst/war3map.j
 wurst.dependencies
-.vscode/settings.json
 *.w3x
 /upload.sh

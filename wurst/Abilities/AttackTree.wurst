@@ -1,0 +1,51 @@
+package AttackTree
+
+import ClosureTimers
+import AbilityObjEditing
+import ObjectIdGenerator
+
+public int ATTACK_TREE_LEVEL1_ID
+public int ATTACK_TREE_LEVEL2_ID
+
+class AttackTreePreset extends AbilityDefinitionEatTree
+    construct(int abilityId)
+        super(abilityId)
+        setName("Attack Tree")
+        setArtSpecial("")
+        setSpecialAttachmentPoint("")
+        setHotkeyNormal("")
+        setCooldown(1, 0)
+        setEatDelay(1, 0)
+        setBuffs(1, "")
+        setHitPointsGained(1, 0)
+        setTooltipNormalExtended(1, "Attacks a tree.")
+        setButtonPositionNormalX(2)
+        setButtonPositionNormalY(1)
+
+public function initAttackTree(bool compile)
+    ATTACK_TREE_LEVEL1_ID = ABIL_ID_GEN.next()
+    ATTACK_TREE_LEVEL2_ID = ABIL_ID_GEN.next()
+    if (compile)
+        new AttackTreePreset(ATTACK_TREE_LEVEL1_ID)
+            ..setRipDelay(1, 1.5)
+            ..setTooltipNormal(1, "Attack Tree [|cffffcc00Level 1|r]")
+
+        new AttackTreePreset(ATTACK_TREE_LEVEL2_ID)
+            ..setRipDelay(1, 0.5)
+            ..setTooltipNormal(1, "Attack Tree [|cffffcc00Level 2|r]")
+    else
+        setupAttackTreeLogic()
+
+public function setupAttackTreeLogic()
+    CreateTrigger()
+        ..registerAnyUnitEvent(EVENT_PLAYER_UNIT_SPELL_CAST)
+        ..addAction(() -> begin
+            let abilityId = GetSpellAbilityId()
+            let hero = GetTriggerUnit()
+            if (abilityId == ATTACK_TREE_LEVEL1_ID or abilityId == ATTACK_TREE_LEVEL2_ID)
+                doAfter(0.1, () -> begin
+                    hero
+                      ..setAnimation("attack")
+                      ..queueAnimation(abilityId == ATTACK_TREE_LEVEL1_ID ? "attack" : "stand")
+                end)
+        end)

@@ -1,0 +1,8 @@
+package AbilitiesInitializer
+
+import AttackTree
+import FlameStrike
+
+public function initAbilities(bool compile)
+    initAttackTree(compile)
+    initFlameStrike(compile)

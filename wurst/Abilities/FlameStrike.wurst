@@ -1,0 +1,22 @@
+package FlameStrike
+
+import AbilityObjEditing
+import ObjectIdGenerator
+
+public int FLAME_STRIKE_ID
+
+public function initFlameStrike(bool compile)
+    FLAME_STRIKE_ID = ABIL_ID_GEN.next()
+    if (compile)
+        new AbilityDefinitionFlameStrikeCreep(FLAME_STRIKE_ID)
+        ..setLevels(1)
+        ..setManaCost(1, 50)
+        ..setCastingTime(1, 0.3)
+        ..setCooldown(1, 20)
+        ..setTargetsAllowed(1, "tree")
+        ..setAreaofEffect(1, 250)
+        ..setMaximumDamage(1, 120)
+        ..setTooltipNormal(1, "|cffffcc00F|rlame Strike")
+        ..setTooltipNormalExtended(1, "Conjures a pillar of flame that burns trees.")
+        ..setButtonPositionNormalX(1)
+        ..setButtonPositionNormalY(1)

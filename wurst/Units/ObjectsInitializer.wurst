@@ -1,11 +1,11 @@
-package UnitsInitializer
+package ObjectsInitializer
 
+import AbilitiesInitializer
 import Infernals
 import Sellers
 
-public int SELLER_ID_1 = 0
-
 function doInit(bool compile)
+    initAbilities(compile)
     initInfernals(compile)
     initSellers(compile)
 
@@ -13,4 +13,4 @@ init
     doInit(false)
 
 @compiletime function initialize()
-    doInit(true)    
+    doInit(true)

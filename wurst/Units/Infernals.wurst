@@ -3,15 +3,21 @@ package Infernals
 import HeroPreset
 import UnitObjEditing
 import ObjectIdGenerator
-import TimerUtils
+import ObjectIds
+
+import AttackTree
+import FlameStrike
 
 public int INFERNAL_ID_1 = 0
 
 public function initInfernals(bool compile)
     INFERNAL_ID_1 = HERO_ID_GEN.next()
     if (compile)
-        let infernal = new HeroPreset(INFERNAL_ID_1, 'Udre', "Infernal")
-        infernal.setModelFile("units\\demon\\Infernal\\Infernal.mdl")
-        infernal.setScalingValue(1.2)
-        infernal.setCollisionSize(50)
-        infernal.buildHero()
+        new HeroPreset(INFERNAL_ID_1, 'Udre', "Infernal")
+            ..setModelFile("units\\demon\\Infernal\\Infernal.mdl")
+            ..setScalingValue(1.2)
+            ..setCollisionSize(50)
+            ..buildHeroAbilities()
+            ..buildHero()
+            ..setAttack1TargetsAllowed("ground,structure,debris,item,ward")
+            ..setNormalAbilities("AInv," + int2fourchar(ATTACK_TREE_LEVEL1_ID) + "," + int2fourchar(FLAME_STRIKE_ID))

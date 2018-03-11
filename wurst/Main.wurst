@@ -1,25 +1,34 @@
 package Main
 
 import ClosureTimers
-import Infernals
 import ClosureForGroups
 
+import Infernals
 import PlayableRegion
+import AttackTree
 
 constant NO_TREES_MODE = false
+unit U
 
 init
 	SetTimeOfDay(0)
 	SuspendTimeOfDay(true)
 	CreateFogModifierRadiusLocBJ(true, Player(0), FOG_OF_WAR_VISIBLE, GetRectCenter(GetPlayableMapRect()), 1024)
 	initializeArea(5)
-	
-	if NO_TREES_MODE
-		doAfter(0.1, () -> begin
-			CreateUnitAtLoc(Player(0), INFERNAL_ID_1, Location(0, 0), 0.0)
+
+	doAfter(0.1, () -> begin
+		U = CreateUnitAtLoc(Player(0), INFERNAL_ID_1, Location(0, 0), 0.0)
+		U.setAnimation("attack")
+
+		if NO_TREES_MODE
 			forDestructablesInRect(GetEntireMapRect(), (destructable d) -> begin
 				if d.getTypeId() == 'ATtr'
 					RemoveDestructable(d)
 			end)
-		end)
-	
+	end)
+
+	// TODO: trigger on level 4
+	doAfter(15, () -> begin
+		U.removeAbility(ATTACK_TREE_LEVEL1_ID)
+		U.addAbility(ATTACK_TREE_LEVEL2_ID)
+	end)

@@ -3,11 +3,11 @@ package Sellers
 import UnitObjEditing
 import ObjectIdGenerator
 
-public class SellerPreset extends UnitDefinition	
+public class SellerPreset extends UnitDefinition
 	construct(int newId, int origId, string name)
 		super(newId, origId)
 		setName(name)
 		setNormalAbilities("Ane2,Avul")
 		setCollisionSize(32)
-		
+
 public function initSellers(bool compile)
