@@ -3,6 +3,15 @@ package AbilitiesInitializer
 import AttackTree
 import FlameStrike
 
+import SummonInferno
+import SummonInfernalLavaSpawn
+import SummonShade
+
 public function initAbilities(bool compile)
     initAttackTree(compile)
     initFlameStrike(compile)
+
+public function initSummoningAbilities(bool compile)
+    initSummonInferno(compile)
+    initSummonInfernalLavaSpawn(compile)
+    initSummonShade(compile)

@@ -1,11 +1,14 @@
 package ObjectsInitializer
 
 import AbilitiesInitializer
+import SummonedUnitsInitializer
 import Infernals
 import Sellers
 
 function doInit(bool compile)
     initAbilities(compile)
+    initSummonedUnits(compile)
+    initSummoningAbilities(compile)
     initInfernals(compile)
     initSellers(compile)
 

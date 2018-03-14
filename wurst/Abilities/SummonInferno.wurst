@@ -1,0 +1,48 @@
+package SummonInferno
+
+import AbilityObjEditing
+import ObjectIdGenerator
+import ObjectIds
+
+import SummonedInferno
+
+public int SUMMON_INFERNO_ID
+
+public function initSummonInferno(bool compile)
+    SUMMON_INFERNO_ID = ABIL_ID_GEN.next()
+    if (compile)
+        new AbilityDefinitionDreadlordInferno(SUMMON_INFERNO_ID)
+        ..setLevels(3)
+        ..setRequiredLevel(1)
+        ..setLevelSkipRequirement(0)
+        ..setSummonedUnit(1, int2fourchar(SUMMONED_INFERNO_LEVEL1_ID))
+        ..setSummonedUnit(2, int2fourchar(SUMMONED_INFERNO_LEVEL2_ID))
+        ..setSummonedUnit(3, int2fourchar(SUMMONED_INFERNO_LEVEL3_ID))
+        ..setCooldown(1, 65)
+        ..setCooldown(2, 65)
+        ..setCooldown(3, 65)
+        ..setManaCost(1, 150)
+        ..setManaCost(2, 150)
+        ..setManaCost(3, 150)
+        ..setDuration(1, 15)
+        ..setDuration(2, 30)
+        ..setDuration(3, 45)
+        ..setHotkeyLearn("E")
+        ..setHotkeyNormal("E")
+        ..setName("Summon Inferno")
+        // TODO: create such buffs
+        ..setBuffs(1, "Summon Inferno")
+        ..setBuffs(2, "Summon Inferno")
+        ..setBuffs(3, "Summon Inferno")
+        ..setTooltipLearn("Summon Inf|cffffcc00e|rrno - [|cffffcc00Level %d|r]")
+        ..setTooltipLearnExtended("Calls an Infernal down from the sky, dealing damage and stunning enemy land units in an area.")
+        ..setTooltipNormal(1, "Summon Inf|cffffcc00e|rrno [|cffffcc00Level 1|r]")
+        ..setTooltipNormal(2, "Summon Inf|cffffcc00e|rrno [|cffffcc00Level 2|r]")
+        ..setTooltipNormal(3, "Summon Inf|cffffcc00e|rrno [|cffffcc00Level 3|r]")
+        ..setTooltipNormalExtended(1, "Calls an Inferno down from the sky, dealing <" + int2fourchar(SUMMON_INFERNO_ID) +",DataA1> damage and stunning enemy land units for <" + int2fourchar(SUMMON_INFERNO_ID) +",Dur1> seconds in an area. The Infernal lasts <" + int2fourchar(SUMMON_INFERNO_ID) +",DataB1> seconds.")
+        ..setTooltipNormalExtended(2, "Calls an Inferno down from the sky, dealing <" + int2fourchar(SUMMON_INFERNO_ID) +",DataA1> damage and stunning enemy land units for <" + int2fourchar(SUMMON_INFERNO_ID) +",Dur2> seconds in an area. The Infernal lasts <" + int2fourchar(SUMMON_INFERNO_ID) +",DataB2> seconds.")
+        ..setTooltipNormalExtended(3, "Calls an Inferno down from the sky, dealing <" + int2fourchar(SUMMON_INFERNO_ID) +",DataA1> damage and stunning enemy land units for <" + int2fourchar(SUMMON_INFERNO_ID) +",Dur3> seconds in an area. The Infernal lasts <" + int2fourchar(SUMMON_INFERNO_ID) +",DataB3> seconds.")
+        ..setButtonPositionNormalX(0)
+        ..setButtonPositionNormalY(2)
+        ..setButtonPositionResearchX(0)
+        ..setButtonPositionResearchY(2)

@@ -1,0 +1,38 @@
+package SummonedInferno
+
+import ObjectIdGenerator
+import UnitObjEditing
+import ObjectIds
+
+import AttackTree
+
+public int SUMMONED_INFERNO_LEVEL1_ID
+public int SUMMONED_INFERNO_LEVEL2_ID
+public int SUMMONED_INFERNO_LEVEL3_ID
+
+class SummonedInfernoPreset extends UnitDefinition
+    construct(int unitId)
+        super(unitId, 'ninf')
+        setName("Summoned Inferno")
+        setNormalAbilities(int2fourchar(ATTACK_TREE_LEVEL1_ID))
+
+public function initSummonedInferno(bool compile)
+    SUMMONED_INFERNO_LEVEL1_ID = UNIT_ID_GEN.next()
+    SUMMONED_INFERNO_LEVEL2_ID = UNIT_ID_GEN.next()
+    SUMMONED_INFERNO_LEVEL3_ID = UNIT_ID_GEN.next()
+
+    if (compile)
+        new SummonedInfernoPreset(SUMMONED_INFERNO_LEVEL1_ID)
+            ..setHitPointsMaximumBase(800)
+            ..setAttack1DamageBase(40)
+            ..setScalingValue(0.7)
+
+        new SummonedInfernoPreset(SUMMONED_INFERNO_LEVEL2_ID)
+            ..setHitPointsMaximumBase(1100)
+            ..setAttack1DamageBase(65)
+            ..setScalingValue(0.9)
+
+        new SummonedInfernoPreset(SUMMONED_INFERNO_LEVEL3_ID)
+            ..setHitPointsMaximumBase(1400)
+            ..setAttack1DamageBase(90)
+            ..setScalingValue(1.05)

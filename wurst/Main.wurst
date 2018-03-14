@@ -18,6 +18,7 @@ init
 
 	doAfter(0.1, () -> begin
 		U = CreateUnitAtLoc(Player(0), INFERNAL_ID_1, Location(0, 0), 0.0)
+		U.addLevels(10, true)
 		U.setAnimation("attack")
 
 		if NO_TREES_MODE

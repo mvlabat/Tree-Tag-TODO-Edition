@@ -8,6 +8,10 @@ import ObjectIds
 import AttackTree
 import FlameStrike
 
+import SummonInferno
+import SummonInfernalLavaSpawn
+import SummonShade
+
 public int INFERNAL_ID_1 = 0
 
 public function initInfernals(bool compile)
@@ -15,8 +19,12 @@ public function initInfernals(bool compile)
     if (compile)
         new HeroPreset(INFERNAL_ID_1, 'Udre', "Infernal")
             ..setModelFile("units\\demon\\Infernal\\Infernal.mdl")
-            ..setScalingValue(1.2)
+            ..setUnitSoundSet("Infernal")
+            ..setScalingValue(1.3)
             ..setCollisionSize(50)
+            ..addHeroAbility(SUMMON_INFERNO_ID)
+            ..addHeroAbility(SUMMON_INFERNAL_LAVA_SPAWN_ID)
+            ..addHeroAbility(SUMMON_SHADE_ID)
             ..buildHeroAbilities()
             ..buildHero()
             ..setAttack1TargetsAllowed("ground,structure,debris,item,ward")

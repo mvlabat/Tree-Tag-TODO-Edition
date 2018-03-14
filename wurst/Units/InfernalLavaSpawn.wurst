@@ -1,0 +1,36 @@
+package InfernalLavaSpawn
+
+import ObjectIdGenerator
+import UnitObjEditing
+
+public int INFERNAL_LAVA_SPAWN_LEVEL1_ID
+public int INFERNAL_LAVA_SPAWN_LEVEL2_ID
+public int INFERNAL_LAVA_SPAWN_LEVEL3_ID
+
+class InfernalLavaSpawnPreset extends UnitDefinition
+    construct(int unitId)
+        super(unitId, 'nlv1')
+        setName("Infernal Lava Spawn")
+        setTintingColorRed(20)
+        setTintingColorGreen(255)
+        setTintingColorBlue(20)
+
+public function initInfernalLavaSpawn(bool compile)
+    INFERNAL_LAVA_SPAWN_LEVEL1_ID = UNIT_ID_GEN.next()
+    INFERNAL_LAVA_SPAWN_LEVEL2_ID = UNIT_ID_GEN.next()
+    INFERNAL_LAVA_SPAWN_LEVEL3_ID = UNIT_ID_GEN.next()
+
+    if (compile)
+        new InfernalLavaSpawnPreset(INFERNAL_LAVA_SPAWN_LEVEL1_ID)
+            ..setHitPointsMaximumBase(300)
+            ..setAttack1DamageBase(20)
+            ..setScalingValue(0.9)
+
+        new InfernalLavaSpawnPreset(INFERNAL_LAVA_SPAWN_LEVEL2_ID)
+            ..setHitPointsMaximumBase(350)
+            ..setAttack1DamageBase(35)
+
+        new InfernalLavaSpawnPreset(INFERNAL_LAVA_SPAWN_LEVEL3_ID)
+            ..setHitPointsMaximumBase(400)
+            ..setAttack1DamageBase(45)
+            ..setScalingValue(1.1)

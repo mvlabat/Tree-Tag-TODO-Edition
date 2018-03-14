@@ -1,0 +1,34 @@
+package SummonInfernalLavaSpawn
+
+import AbilityObjEditing
+import ObjectIdGenerator
+import ObjectIds
+
+import InfernalLavaSpawn
+
+public int SUMMON_INFERNAL_LAVA_SPAWN_ID
+
+public function initSummonInfernalLavaSpawn(bool compile)
+    SUMMON_INFERNAL_LAVA_SPAWN_ID = ABIL_ID_GEN.next()
+    if (compile)
+        new AbilityDefinitionFirelordSummonLavaSpawn(SUMMON_INFERNAL_LAVA_SPAWN_ID)
+            ..setSummonedUnitType(1, int2fourchar(INFERNAL_LAVA_SPAWN_LEVEL1_ID))
+            ..setSummonedUnitType(2, int2fourchar(INFERNAL_LAVA_SPAWN_LEVEL2_ID))
+            ..setSummonedUnitType(3, int2fourchar(INFERNAL_LAVA_SPAWN_LEVEL3_ID))
+            ..setCooldown(1, 50)
+            ..setCooldown(2, 50)
+            ..setCooldown(3, 50)
+            ..setManaCost(1, 150)
+            ..setManaCost(2, 150)
+            ..setManaCost(3, 150)
+            ..setDurationNormal(1, 15)
+            ..setDurationNormal(2, 30)
+            ..setDurationNormal(3, 45)
+            ..setTooltipLearnExtended("Summons a Lava Spawn, a resilient and deadly fire creature. As a Lava Spawn deals damage, it consumes the flesh of its target, eventually splitting into two healthy Lava Spawns.|nLasts <ANlm,Dur1> seconds.|n|n|cffffcc00Level 1|r - <" + int2fourchar(INFERNAL_LAVA_SPAWN_LEVEL1_ID) +",realHP> hit points, <" + int2fourchar(INFERNAL_LAVA_SPAWN_LEVEL1_ID) +",mindmg1> - <" + int2fourchar(INFERNAL_LAVA_SPAWN_LEVEL1_ID) +",maxdmg1> damage.|n|cffffcc00Level 2|r - <" + int2fourchar(INFERNAL_LAVA_SPAWN_LEVEL2_ID) +",realHP> hit points, <" + int2fourchar(INFERNAL_LAVA_SPAWN_LEVEL2_ID) +",mindmg1> - <" + int2fourchar(INFERNAL_LAVA_SPAWN_LEVEL2_ID) +",maxdmg1> damage.|n|cffffcc00Level 3|r - <" + int2fourchar(INFERNAL_LAVA_SPAWN_LEVEL3_ID) +",realHP> hit points, <" + int2fourchar(INFERNAL_LAVA_SPAWN_LEVEL3_ID) +",mindmg1> - <" + int2fourchar(INFERNAL_LAVA_SPAWN_LEVEL3_ID) +",maxdmg1> damage.|n|n|cffffcc00Attacks ground and air units.|r")
+            ..setTooltipNormalExtended(1, "Summons a Lava Spawn, a resilient and deadly fire creature. As a Lava Spawn deals damage, it consumes the flesh of its target, thereby fueling its fires and eventually splitting into two healthy Lava Spawns.|n|nHas <" + int2fourchar(INFERNAL_LAVA_SPAWN_LEVEL1_ID) +",realHP> hit points and deals <" + int2fourchar(INFERNAL_LAVA_SPAWN_LEVEL1_ID) +",mindmg1> - <" + int2fourchar(INFERNAL_LAVA_SPAWN_LEVEL1_ID) +",maxdmg1> damage.|nLasts <" + int2fourchar(SUMMON_INFERNAL_LAVA_SPAWN_ID) +",Dur1> seconds.|n|n|cffffcc00Attacks ground and air units.|r")
+            ..setTooltipNormalExtended(2, "Summons a Lava Spawn, a resilient and deadly fire creature. As a Lava Spawn deals damage, it consumes the flesh of its target, thereby fueling its fires and eventually splitting into two healthy Lava Spawns.|n|nHas <" + int2fourchar(INFERNAL_LAVA_SPAWN_LEVEL2_ID) +",realHP> hit points and deals <" + int2fourchar(INFERNAL_LAVA_SPAWN_LEVEL2_ID) +",mindmg1> - <" + int2fourchar(INFERNAL_LAVA_SPAWN_LEVEL2_ID) +",maxdmg1> damage.|nLasts <" + int2fourchar(SUMMON_INFERNAL_LAVA_SPAWN_ID) +",Dur1> seconds.|n|n|cffffcc00Attacks ground and air units.|r")
+            ..setTooltipNormalExtended(3, "Summons a Lava Spawn, a resilient and deadly fire creature. As a Lava Spawn deals damage, it consumes the flesh of its target, thereby fueling its fires and eventually splitting into two healthy Lava Spawns.|n|nHas <" + int2fourchar(INFERNAL_LAVA_SPAWN_LEVEL3_ID) +",realHP> hit points and deals <" + int2fourchar(INFERNAL_LAVA_SPAWN_LEVEL3_ID) +",mindmg1> - <" + int2fourchar(INFERNAL_LAVA_SPAWN_LEVEL3_ID) +",maxdmg1> damage.|nLasts <" + int2fourchar(SUMMON_INFERNAL_LAVA_SPAWN_ID) +",Dur1> seconds.|n|n|cffffcc00Attacks ground and air units.|r")
+            ..setButtonPositionNormalX(0)
+            ..setButtonPositionNormalY(2)
+            ..setButtonPositionResearchX(0)
+            ..setButtonPositionResearchY(2)

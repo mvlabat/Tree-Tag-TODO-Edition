@@ -1,0 +1,44 @@
+package SummonShade
+
+import AbilityObjEditing
+import ObjectIdGenerator
+import ObjectIds
+
+public int SUMMON_SHADE_ID
+
+public function initSummonShade(bool compile)
+    SUMMON_SHADE_ID = ABIL_ID_GEN.next()
+    if (compile)
+        new AbilityDefinitionFarseerSpiritWolf(SUMMON_SHADE_ID)
+        ..setDurationNormal(2, 120)
+        ..setDurationNormal(3, 240)
+        ..setNumberofSummonedUnits(1, 1)
+        ..setNumberofSummonedUnits(2, 2)
+        ..setNumberofSummonedUnits(3, 3)
+        ..setSummonedUnit(1, "ushd")
+        ..setSummonedUnit(2, "ushd")
+        ..setSummonedUnit(3, "ushd")
+        ..setDurationNormal(1, 30)
+        ..setDurationNormal(2, 60)
+        ..setDurationNormal(3, 120)
+        ..setHotkeyLearn("S")
+        ..setHotkeyNormal("S")
+        ..setName("Summon Shade")
+        // TODO: create such buffs
+        ..setBuffs(1, "Summon Shade")
+        ..setBuffs(2, "Summon Shade")
+        ..setBuffs(3, "Summon Shade")
+        ..setTooltipLearn("Summon |cffffcc00S|rhade - [|cffffcc00Level %d|r]")
+        ..setTooltipLearnExtended("Summons a shade - permanently invisible spirit - that can see other invisible units.")
+        ..setTooltipNormal(1, "Summon |cffffcc00S|rhade [|cffffcc00Level 1|r]")
+        ..setTooltipNormal(2, "Summon |cffffcc00S|rhade [|cffffcc00Level 2|r]")
+        ..setTooltipNormal(3, "Summon |cffffcc00S|rhade [|cffffcc00Level 3|r]")
+        ..setTooltipNormalExtended(1, "Summons a shade - permanently invisible spirit - that can see other invisible units. |nLasts <" + int2fourchar(SUMMON_SHADE_ID) +",Dur1> seconds.")
+        ..setTooltipNormalExtended(2, "Summons 2 shades - permanently invisible spirits - that can see other invisible units. |nLasts <" + int2fourchar(SUMMON_SHADE_ID) +",Dur2> seconds.")
+        ..setTooltipNormalExtended(3, "Summons 3 shades - permanently invisible spirits - that can see other invisible units. |nLasts <" + int2fourchar(SUMMON_SHADE_ID) +",Dur3> seconds.")
+        ..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNShade.blp")
+        ..setIconResearch("ReplaceableTextures\\CommandButtons\\BTNShade.blp")
+        ..setButtonPositionNormalX(0)
+        ..setButtonPositionNormalY(2)
+        ..setButtonPositionResearchX(0)
+        ..setButtonPositionResearchY(2)

@@ -1,0 +1,9 @@
+package SummonedUnitsInitializer
+
+import SummonedInferno
+import InfernalLavaSpawn
+
+public function initSummonedUnits(bool compile)
+    initSummonedInferno(compile)
+    initInfernalLavaSpawn(compile)
+
